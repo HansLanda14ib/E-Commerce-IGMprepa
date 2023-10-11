@@ -1,0 +1,4 @@
+download the windows_amd64.exe then rename to docgen.exe
+(https://github.com/thedevsaddam/docgen/releases)
+move the json file in the same dir as docgen then execute this command :
+.\docgen build -i docs.json -o .\index.html
