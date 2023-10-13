@@ -12,7 +12,7 @@ router
     .get(getAllProducts);
 router
     .route('/uploadImage')
-    .post([authenticateUser, authorizePermissions('admin')], uploadImageLocal);
+    .post([authenticateUser, authorizePermissions('admin')], uploadImage);
 router
     .route('/:id')
     .get(getSingleProduct)
