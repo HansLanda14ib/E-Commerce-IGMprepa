@@ -17,7 +17,7 @@ const getAllProducts = async (req, res) => {
 const getSingleProduct = async (req, res) => {
     const product = await Product.findOne({_id: req.params.id}).populate('reviews')
     if (!product) throw new CustomError.NotFoundError('product not found')
-    res.status(StatusCodes.OK).json({product})
+    res.status(StatusCodes.OK).json(product)
 }
 const updateProduct = async (req, res) => {
     const product = await Product.findOneAndUpdate({_id: req.params.id},
