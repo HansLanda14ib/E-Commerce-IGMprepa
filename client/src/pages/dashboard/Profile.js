@@ -8,17 +8,15 @@ const Profile = () => {
         useAppContext();
     const [name, setName] = useState(user?.name);
     const [email, setEmail] = useState(user?.email);
-    const [lastName, setLastName] = useState(user?.lastName);
-    const [location, setLocation] = useState(user?.location);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!name || !email || !lastName || !location) {
+        if (!name || !email) {
             displayAlert();
             return;
         }
 
-        updateUser({name, email, lastName, location});
+        updateUser({name, email});
     };
     return (
         <Wrapper>
@@ -34,13 +32,7 @@ const Profile = () => {
                         value={name}
                         handleChange={(e) => setName(e.target.value)}
                     />
-                    <FormRow
-                        labelText='last name'
-                        type='text'
-                        name='lastName'
-                        value={lastName}
-                        handleChange={(e) => setLastName(e.target.value)}
-                    />
+
                     <FormRow
                         type='email'
                         name='email'
@@ -48,12 +40,6 @@ const Profile = () => {
                         handleChange={(e) => setEmail(e.target.value)}
                     />
 
-                    <FormRow
-                        type='text'
-                        name='location'
-                        value={location}
-                        handleChange={(e) => setLocation(e.target.value)}
-                    />
                     <button className='btn btn-block' type='submit' disabled={isLoading}>
                         {isLoading ? 'Please Wait...' : 'save changes'}
                     </button>

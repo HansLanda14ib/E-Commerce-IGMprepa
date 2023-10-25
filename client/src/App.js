@@ -11,7 +11,7 @@ import {
     Products,
     PrivateRoute,
 } from './pages';
-import {AddJob, AllJobs, Profile, Stats} from "./pages/dashboard";
+import {AddProduct, AllProducts, Profile, Stats,Clients} from "./pages/dashboard";
 import PublicLayout from "./pages/PublicLayout";
 import AdminLayout from "./pages/AdminLayout";
 import Register from "./pages/Register";
@@ -33,8 +33,9 @@ function App() {
                 {/* Admin Routes */}
                 <Route path="admin/*" element={<AdminLayout/>}>
                     <Route path='stats' element={<Stats/>}/>
-                    <Route path='all-jobs' element={<AllJobs/>}></Route>
-                    <Route path='add-job' element={<AddJob/>}></Route>
+                    <Route path='all-products' element={<AllProducts/>}></Route>
+                    <Route path='add-product' element={<AddProduct/>}></Route>
+                    <Route path='clients' element={<Clients/>}></Route>
                     <Route path='profile' element={<Profile/>}></Route>
                 </Route>
 

@@ -112,14 +112,14 @@ const AppProvider = ({children}) => {
             const {data} = await authFetch.patch('/auth/updateUser', currentUser);
 
             // no token
-            const {user, location} = data;
+            const {user} = data;
 
             dispatch({
                 type: UPDATE_USER_SUCCESS,
-                payload: {user, location},
+                payload: {user},
             });
 
-            addUserToLocalStorage({user, location});
+            addUserToLocalStorage({user});
         } catch (error) {
             if (error.response.status !== 401) {
                 dispatch({
