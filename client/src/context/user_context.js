@@ -11,6 +11,16 @@ import {
     UPDATE_USER_BEGIN,
     UPDATE_USER_SUCCESS,
     UPDATE_USER_ERROR,
+    CLEAR_VALUES,
+    CREATE_PRODUCT_BEGIN,
+    CREATE_PRODUCT_SUCCESS,
+    CREATE_PRODUCT_ERROR,
+    HANDLE_CHANGE,
+    UPLOAD_IMAGE_BEGIN,
+    UPLOAD_IMAGE_ERROR,
+    UPLOAD_IMAGE_SUCCESS,
+    ADD_COLOR,
+    REMOVE_COLOR
 
 } from "../actions";
 import axios from "axios";
@@ -18,13 +28,28 @@ import axios from "axios";
 const user = localStorage.getItem('user')
 
 const initialState = {
-    isAdmin:false,
+    isAdmin: false,
     showSidebar: false,
     isLoading: false,
     showAlert: false,
     alertText: '',
     alertType: '',
     user: user ? JSON.parse(user) : null,
+    isEditing: false,
+    editJobId: '',
+    name: '',
+    price: 0,
+    description: '',
+    images: [],
+    category: '',
+    categoryOptions: ['mug', 'hat', 'pen', 'bag', 'hoodie', 'sweater', 't-shirt'],
+    companyOptions: ['top', 'buttom'],
+    company: '',
+    colors: [],
+    featured: false,
+    freeShipping: false,
+    inventory: 15,
+
 
 };
 
@@ -131,11 +156,70 @@ const AppProvider = ({children}) => {
         }
         clearAlert();
     };
+    const handleChange = ({name, value}) => {
+        dispatch({type: HANDLE_CHANGE, payload: {name, value}});
+    };
+    const clearValues = () => {
+        dispatch({type: CLEAR_VALUES});
+    };
+    const createProduct = async () => {
+        dispatch({type: CREATE_PRODUCT_BEGIN});
+        try {
+            const {name, price, description, category, company, inventory, images, colors} = state;
+            //console.log(images)
+            await authFetch.post('/products', {
+                name, price, description, category, company, inventory, images, colors
+            });
+            dispatch({type: CREATE_PRODUCT_SUCCESS});
+            //dispatch({type: CLEAR_VALUES});
+        } catch (error) {
+            if (error.response.status === 401) return;
+            dispatch({
+                type: CREATE_PRODUCT_ERROR,
+                payload: {msg: error.response.data.msg},
+            });
+        }
+        clearAlert();
+    };
+    const uploadImage = async (formData) => {
+        dispatch({type: UPLOAD_IMAGE_BEGIN})
+        try {
+            const response = await axios.post('/api/v1/products/uploadImage', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+            console.log(response.data.image.src)
+            dispatch({type: UPLOAD_IMAGE_SUCCESS, payload: response.data.image.src});
+            //return response.data.image.src
+        } catch (error) {
+            dispatch({
+                type: UPLOAD_IMAGE_ERROR,
+                payload: {msg: error.response.data.msg},
+            });
+        }
+        clearAlert();
+    }
 
+    const addColor = (color) => {
+        dispatch({type: ADD_COLOR, payload: color});
+    }
+    const removeColor = (color) => {
+        dispatch({type: REMOVE_COLOR, payload: color});
+    }
     return (
         <UserContext.Provider
             value={{
-                ...state, displayAlert, setupUser, toggleSidebar, updateUser, logoutUser
+                ...state,
+                displayAlert,
+                setupUser,
+                toggleSidebar,
+                updateUser,
+                logoutUser,
+                handleChange,
+                clearValues,
+                createProduct,
+                uploadImage, addColor, removeColor
             }}
         >
             {children}

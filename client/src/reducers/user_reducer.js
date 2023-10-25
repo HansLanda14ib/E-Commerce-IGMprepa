@@ -4,7 +4,15 @@ import {
     TOGGLE_SIDEBAR,
     UPDATE_USER_BEGIN,
     UPDATE_USER_ERROR,
-    UPDATE_USER_SUCCESS
+    UPDATE_USER_SUCCESS,
+    HANDLE_CHANGE,
+    CLEAR_VALUES,
+    CREATE_PRODUCT_BEGIN,
+    CREATE_PRODUCT_SUCCESS,
+    CREATE_PRODUCT_ERROR,
+    UPLOAD_IMAGE_BEGIN,
+    UPLOAD_IMAGE_SUCCESS,
+    UPLOAD_IMAGE_ERROR, ADD_COLOR, REMOVE_COLOR,
 } from "../actions";
 
 const reducer = (state, action) => {
@@ -86,6 +94,92 @@ const reducer = (state, action) => {
             showAlert: true,
             alertType: 'danger',
             alertText: action.payload.msg,
+        }
+    }
+
+    if (action.type === HANDLE_CHANGE) {
+        return {
+            ...state,
+            [action.payload.name]: action.payload.value,
+        };
+    }
+    if (action.type === CLEAR_VALUES) {
+        const initialState = {
+            isEditing: false,
+            editJobId: '',
+            name: '',
+            price: 0,
+            description: '',
+            images: [],
+            category: '',
+            company: '',
+            colors: [],
+            featured: false,
+            freeShipping: false,
+            inventory: 15,
+        };
+
+        return {
+            ...state,
+            ...initialState,
+        };
+    }
+    if (action.type === CREATE_PRODUCT_BEGIN) {
+        return {...state, isLoading: true};
+    }
+
+    if (action.type === CREATE_PRODUCT_SUCCESS) {
+        return {
+            ...state,
+            isLoading: false,
+            showAlert: true,
+            alertType: 'success',
+            alertText: 'New Product Created!',
+        };
+    }
+    if (action.type === CREATE_PRODUCT_ERROR) {
+        return {
+            ...state,
+            isLoading: false,
+            showAlert: true,
+            alertType: 'danger',
+            alertText: action.payload.msg,
+        };
+    }
+    if (action.type === UPLOAD_IMAGE_BEGIN) {
+        return {
+            ...state, isLoading: true
+        }
+    }
+    if (action.type === UPLOAD_IMAGE_SUCCESS) {
+        return {
+            ...state,
+            isLoading: false,
+            showAlert: true,
+            alertType: 'success',
+            alertText: 'Image Uploaded!',
+            images: [...state.images, action.payload]
+        }
+    }
+    if (action.type === UPLOAD_IMAGE_ERROR) {
+        return {
+            ...state,
+            isLoading: false,
+            showAlert: true,
+            alertType: 'danger',
+            alertText: action.payload.msg,
+        }
+    }
+    if(action.type===ADD_COLOR){
+        return {
+            ...state,
+           colors:[...state.colors,action.payload]
+        }
+    }
+    if(action.type===REMOVE_COLOR){
+        return {
+            ...state,
+            colors:state.colors.filter((color)=>color!==action.payload)
         }
     }
 

@@ -5,7 +5,7 @@ const {createTokenUser, attachCookiesToResponse, checkPermissions} = require('..
 
 const getAllUsers = async (req, res) => {
     console.log(req.user)
-    const users = await User.find({role: 'user'}).select('-password')
+    const users = await User.find({role: 'user'}).select('-password').populate('orders')
     res.status(StatusCodes.OK).json({users})
 }
 
@@ -55,6 +55,7 @@ const updateUserPassword = async (req, res) => {
     res.status(StatusCodes.OK)
 
 }
+
 
 module.exports = {
     getAllUsers,

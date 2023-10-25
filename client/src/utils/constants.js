@@ -42,8 +42,19 @@ export const services = [
     },
 ]
 
+export const defaultColors = [
+    { name: 'Red', code: '#ff0000' },
+    { name: 'Green', code: '#00ff00' },
+    { name: 'Blue', code: '#0000ff' },
+    { name: 'Yellow', code: '#ffff00' },
+    { name: 'Purple', code: '#800080' },
+    { name: 'Cyan', code: '#00ffff' },
+    { name: 'Magenta', code: '#ff00ff' },
+    { name: 'Orange', code: '#ffa500' },
+    // Add more colors as needed
+];
 //export  const products_url = 'https://igmprepa-store.onrender.com/api/v1/products'
 //export const single_product_url = `https://igmprepa-store.onrender.com/api/v1/products/`
 
-export  const products_url = '/api/v1/products'
+export const products_url = '/api/v1/products'
 export const single_product_url = `/api/v1/products/`

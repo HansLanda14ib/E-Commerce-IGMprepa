@@ -7,6 +7,8 @@ const path = require('path');
 const fs = require('fs');
 const createProduct = async (req, res) => {
     req.body.user = req.user.userId
+    req.body.price= req.body.price*100
+    //console.log(req.body)
     const product = await Product.create(req.body)
     res.status(StatusCodes.CREATED).json({product})
 }
@@ -36,7 +38,7 @@ const deleteProduct = async (req, res) => {
 }
 
 const uploadImage = async (req, res) => {
-    console.log(req)
+    //console.log(req)
     const result = await cloudinary.uploader.upload(
         req.files.image.tempFilePath,
         {
