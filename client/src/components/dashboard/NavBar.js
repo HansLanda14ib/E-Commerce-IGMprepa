@@ -30,6 +30,7 @@ const Navbar = () => {
                         <button type='button' className='dropdown-btn' onClick={logoutUser}>
                             logout
                         </button>
+
                     </div>
                 </div>
             </div>

@@ -9,9 +9,9 @@ import {
     Error,
     About,
     Products,
-    PrivateRoute,
+    PrivateRoute, AdminRoute
 } from './pages';
-import {AddProduct, AllProducts, Profile, Stats,Clients} from "./pages/dashboard";
+import {AddProduct, AllProducts, Profile, Stats, Clients} from "./pages/dashboard";
 import PublicLayout from "./pages/PublicLayout";
 import AdminLayout from "./pages/AdminLayout";
 import Register from "./pages/Register";
@@ -31,7 +31,8 @@ function App() {
                     <Route path='products/:id' element={<SingleProduct/>}/>
                 </Route>
                 {/* Admin Routes */}
-                <Route path="admin/*" element={<AdminLayout/>}>
+
+                <Route path="admin/*" element={<AdminRoute><AdminLayout/> </AdminRoute>}>
                     <Route path='stats' element={<Stats/>}/>
                     <Route path='all-products' element={<AllProducts/>}></Route>
                     <Route path='add-product' element={<AddProduct/>}></Route>

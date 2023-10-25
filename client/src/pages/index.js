@@ -6,14 +6,15 @@ import Cart from './CartPage'
 import Error from './ErrorPage'
 import Checkout from './CheckoutPage'
 import PrivateRoute from './PrivateRoute'
+import AdminRoute from './AdminRoute'
 
 export {
-  Home,
-  SingleProduct,
-  Cart,
-  About,
-  Error,
-  Checkout,
-  Products,
-  PrivateRoute,
+    Home,
+    SingleProduct,
+    Cart,
+    About,
+    Error,
+    Checkout,
+    Products,
+    PrivateRoute, AdminRoute
 }
