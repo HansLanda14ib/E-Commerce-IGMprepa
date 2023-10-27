@@ -38,17 +38,17 @@ const deleteProduct = async (req, res) => {
 }
 
 const uploadImage = async (req, res) => {
-    //console.log(req)
-    const result = await cloudinary.uploader.upload(
-        req.files.image.tempFilePath,
-        {
+    const images = [];
+    for (const file of req.files.image) {
+        const result = await cloudinary.uploader.upload(file.tempFilePath, {
             use_filename: true,
             folder: 'Ecommerce-uploads',
-        }
-    );
-    fs.unlinkSync(req.files.image.tempFilePath);
-    return res.status(StatusCodes.OK).json({image: {src: result.secure_url}});
-}
+        });
+        fs.unlinkSync(file.tempFilePath);
+        images.push({ src: result.secure_url });
+    }
+    return res.status(StatusCodes.OK).json(images);
+};
 const uploadImageLocal = async (req, res) => {
     if (!req.files) {
         throw new CustomError.BadRequestError('No File Uploaded');

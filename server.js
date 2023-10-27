@@ -36,9 +36,9 @@ const helmet = require('helmet');
 const xss = require('xss-clean');
 const cors = require('cors');
 const mongoSanitize = require('express-mongo-sanitize');
-
+/*
 app.set('trust proxy', 1);
-/*app.use(
+app.use(
     rateLimiter({
         windowMs: 15 * 60 * 1000,
         max: 60,

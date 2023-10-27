@@ -71,6 +71,11 @@ const getAllOrders = async (req, res) => {
     const orders = await Order.find({});
     res.status(StatusCodes.OK).json({ orders, count: orders.length });
 };
+const getAllOrdersByClient = async (req, res) => {
+    const { id: clientId } = req.params;
+    const orders = await Order.find({user:clientId});
+    res.status(StatusCodes.OK).json({ orders, count: orders.length });
+};
 const getSingleOrder = async (req, res) => {
     const { id: orderId } = req.params;
     const order = await Order.findOne({ _id: orderId });
@@ -107,4 +112,5 @@ module.exports = {
     getCurrentUserOrders,
     createOrder,
     updateOrder,
+    getAllOrdersByClient,
 };

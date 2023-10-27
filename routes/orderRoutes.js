@@ -9,7 +9,7 @@ const {
   getAllOrders,
   getSingleOrder,
   getCurrentUserOrders,
-  createOrder,
+  createOrder,getAllOrdersByClient,
   updateOrder,
 } = require('../controllers/orderController');
 
@@ -19,7 +19,7 @@ router
   .get(authenticateUser, authorizePermissions('admin'), getAllOrders);
 
 router.route('/showAllMyOrders').get(authenticateUser, getCurrentUserOrders);
-
+router.route('/myorders/:id').get(authenticateUser, getAllOrdersByClient);
 router
   .route('/:id')
   .get(authenticateUser, getSingleOrder)

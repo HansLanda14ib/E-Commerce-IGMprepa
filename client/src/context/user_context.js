@@ -189,8 +189,10 @@ const AppProvider = ({children}) => {
                     'Content-Type': 'multipart/form-data',
                 },
             });
-            console.log(response.data.image.src)
-            dispatch({type: UPLOAD_IMAGE_SUCCESS, payload: response.data.image.src});
+            console.log(response.data)
+            let imagesUrl = response.data.map((image) => image.src)
+            console.log(imagesUrl)
+            dispatch({type: UPLOAD_IMAGE_SUCCESS, payload: imagesUrl});
             //return response.data.image.src
         } catch (error) {
             dispatch({

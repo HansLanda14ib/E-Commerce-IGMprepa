@@ -158,7 +158,7 @@ const reducer = (state, action) => {
             showAlert: true,
             alertType: 'success',
             alertText: 'Image Uploaded!',
-            images: [...state.images, action.payload]
+            images: action.payload
         }
     }
     if (action.type === UPLOAD_IMAGE_ERROR) {

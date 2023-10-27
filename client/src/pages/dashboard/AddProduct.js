@@ -30,15 +30,15 @@ const AddJob = () => {
         freeShipping,
         inventory
     } = useAppContext()
-    const [selectedFile, setSelectedFile] = useState(null);
+    const [selectedFiles, setSelectedFiles] = useState([]);
     const formData = new FormData();
 
     const handleFileChange = (event) => {
-        setSelectedFile(event.target.files[0]);
-
+        const filesArray = Array.from(event.target.files);
+        setSelectedFiles([...selectedFiles, ...filesArray]);
     };
 
-    const handleSubmit =  (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault()
 
         if (!name || !price || !description || !category || !company || !inventory) {
@@ -49,7 +49,7 @@ const AddJob = () => {
              editJob()
              return
          } */
-         createProduct()
+        createProduct()
 
     }
     const handleJobInput = (e) => {
@@ -59,10 +59,12 @@ const AddJob = () => {
     }
 
     const handleChangeImage = async () => {
-        formData.append('image', selectedFile);
+        selectedFiles.forEach((file) => {
+            formData.append('image', file);
+        });
+        console.log(formData);
         await uploadImage(formData);
-        //images=[...images,uploadedImageSrc]
-    }
+    };
 
     return (
         <Wrapper>
@@ -118,13 +120,14 @@ const AddJob = () => {
                     {/* upload image */}
                     <div className='form-row'>
                         <label htmlFor='image' className='form-label'>
-                           Upload Image
+                            Upload Image
                         </label>
 
                         <input
                             type="file"
                             name="image"
                             accept="image/*"
+                            multiple
                             onChange={handleFileChange}
                         />
                         <br/>
@@ -138,7 +141,7 @@ const AddJob = () => {
                         </button>
                     </div>
                     <div className='form-row'>
-                        <ColorPicker />
+                        <ColorPicker/>
                     </div>
 
                     {/* btn container */}
