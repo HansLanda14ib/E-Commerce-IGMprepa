@@ -9,7 +9,7 @@ import { useProductsContext } from '../context/products_context'
 import { useAppContext } from '../context/user_context'
 const Nav = () => {
   const { openSidebar } = useProductsContext()
-  const { myUser } = useAppContext()
+  const { user } = useAppContext()
   return (
     <NavContainer>
       <div className='nav-center'>
@@ -17,7 +17,7 @@ const Nav = () => {
           <Link to='/'>
             <img src={logo} alt='igmprepa' />
           </Link>
-          <button type='button' className='nav-toggle' onClick={openSidebar}>
+          <button type='button' className='nav-toggle' >
             <FaBars />
           </button>
         </div>
@@ -30,9 +30,11 @@ const Nav = () => {
               </li>
             )
           })}
-          {myUser && (
+          {user && (
             <li>
-              <Link to='/checkout'>checkout</Link>
+              <Link to='/orders'>Orders</Link>
+              <Link to='/checkout'>Checkout</Link>
+
             </li>
           )}
         </ul>

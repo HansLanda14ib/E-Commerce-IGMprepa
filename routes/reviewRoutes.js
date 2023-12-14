@@ -12,6 +12,10 @@ router
     .get(getAllReviews);
 
 router
+    .route('/:productId')
+    .get(getAllReviews);
+
+router
     .route('/:id')
     .get(getSingleReview)
     .patch(authenticateUser, updateReview)

@@ -15,6 +15,7 @@ import {AddProduct, AllProducts, Profile, Stats, Clients} from "./pages/dashboar
 import PublicLayout from "./pages/PublicLayout";
 import AdminLayout from "./pages/AdminLayout";
 import Register from "./pages/Register";
+import Orders from "./components/Orders";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
                 <Route path="/" element={<PublicLayout/>}>
                     <Route index element={<Home/>}/>
                     <Route path='products' element={<Products/>}/>
+                    <Route path='orders' element={<PrivateRoute><Orders/> </PrivateRoute>}/>
                     <Route path='about' element={<About/>}/>
                     <Route path='login' element={<Register/>}/>
                     <Route path='cart' element={<Cart/>}/>
@@ -46,6 +48,7 @@ function App() {
                     element={
                         <PrivateRoute>
                             <Checkout/>
+
                         </PrivateRoute>
                     }
                 />

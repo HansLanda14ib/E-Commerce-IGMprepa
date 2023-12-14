@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 
 const SingleOrderItemSchema = mongoose.Schema({
     name: { type: String, required: true },
-    image: { type: String, required: true },
+    image: { type: String },
     price: { type: Number, required: true },
     amount: { type: Number, required: true },
     product: {
@@ -22,7 +22,7 @@ const OrderSchema = mongoose.Schema(
     {
         tax: {
             type: Number,
-            required: true,
+            //required: true,
         },
         shippingFee: {
             type: Number,

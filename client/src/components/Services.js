@@ -5,14 +5,6 @@ const Services = () => {
   return (
     <Wrapper>
       <div className='section-center'>
-        <article className='header'>
-          <h3>
-            Empowering Education <br /> Anywhere, Anytime
-          </h3>
-          <p>
-            If you come shopping in our store, you can only pay contactless, via debit card or credit card.
-          </p>
-        </article>
         <div className='services-center'>
           {services.map((service) => {
             const { id, icon, title, text } = service
@@ -48,8 +40,8 @@ const Wrapper = styled.section`
     color: var(--clr-primary-3);
   }
   .services-center {
-    margin-top: 4rem;
     display: grid;
+    margin: 5rem;
     gap: 2.5rem;
   }
   .service {

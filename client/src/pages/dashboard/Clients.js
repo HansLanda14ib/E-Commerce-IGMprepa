@@ -5,20 +5,20 @@ import axios from "axios";
 const Clients = () => {
     const [users, setUsers] = useState([]);
 
-    useEffect(() => {
-        const fetchUsers = async () => {
-            try {
-                const response = await axios.get('/api/v1/users');
-                //console.log(response.data.users)
-                setUsers(response.data.users); // Assuming response.data is the array of users
-            } catch (error) {
-                // Handle any errors that occur during the fetch
-                console.error('Error fetching users:', error);
-            }
-        };
 
-        fetchUsers();
-    }, []);
+    const fetchUsers = async () => {
+        try {
+            const response = await axios.get('/api/v1/users');
+            //console.log(response.data.users)
+            setUsers(response.data.users); // Assuming response.data is the array of users
+        } catch (error) {
+            // Handle any errors that occur during the fetch
+            console.error('Error fetching users:', error);
+        }
+    };
+
+    fetchUsers();
+
 
     return (
         <Wrapper>
