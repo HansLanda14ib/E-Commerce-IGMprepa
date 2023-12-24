@@ -133,7 +133,7 @@ const Filters = () => {
             />
           </div>
           {/* end of price */}
-          {/* shipping */}
+          {/* shipping
           <div className='form-control shipping'>
             <label htmlFor='shipping'>free shipping</label>
             <input
@@ -144,6 +144,7 @@ const Filters = () => {
               onChange={updateFilters}
             />
           </div>
+          */}
           {/* end of  shipping */}
         </form>
         <button type='button' className='clear-btn' onClick={clearFilters}>

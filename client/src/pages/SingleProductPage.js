@@ -80,7 +80,7 @@ const SingleProductPage = () => {
                             {sku}
                         </p>
                         <p className='info'>
-                            <span>Brand :</span>
+                            <span>Type :</span>
                             {company}
                         </p>
                         <hr/>

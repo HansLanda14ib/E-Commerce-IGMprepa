@@ -9,7 +9,6 @@ const links = [
     {id: 2, text: 'All products', path: 'all-products', icon: <MdQueryStats/>},
     {id: 3, text: 'Add product', path: 'add-product', icon: <MdProductionQuantityLimits/>},
     {id: 4, text: 'Clients', path: 'clients', icon: <FaUsers/>},
-    {id: 5, text: 'Profile', path: 'profile', icon: <ImProfile/>},
 ]
 
 export default links
